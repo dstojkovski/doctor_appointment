@@ -17,6 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($startDate !== $endDate) {
         echo "Error: Start time and end time must be within the same day.";
+        echo '<a class="button-link" href="appointment.html">Home Page</a>';
     } else {
         
         $overlapQuery = "SELECT id FROM Appointments 
@@ -31,15 +32,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         if ($overlapResult->num_rows > 0) {
         echo "Error: Appointment time overlaps with an existing appointment.";
+        echo '<a class="button-link" href="appointment.html">Home Page</a>';
         } else {
         
         $insertQuery = "INSERT INTO Appointments (doctor_id, start_time, end_time, service_e, special_requirements, medical_condition, patient_name, patient_contact) 
             VALUES ('$doctorId', '$startTime', '$endTime', '$service_e', '$specialRequirements', '$medicalCondition', '$patientName', '$patientContact')";
 
         if ($conn->query($insertQuery) === TRUE) {
-        echo "Appointment booked successfully!";
+        echo "Appointment booked successfully!"; <br>
+        echo '<a class="button-link" href="appointment.html">Home Page</a>';
         } else {
         echo "Error: " . $conn->error;
+        echo '<a class="button-link" href="appointment.html">Home Page</a>';
         }
         }
     }

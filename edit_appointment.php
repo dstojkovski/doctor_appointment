@@ -20,7 +20,7 @@ if (isset($_GET['id'])) {
 
 
         if ($startDate !== $endDate) {
-            echo "Error: Start time and end time must be within the same day.";
+            echo "Error: Start time and end time must be within the same day.\n";
         } 
         else{
  
@@ -37,10 +37,11 @@ if (isset($_GET['id'])) {
         $overlapResult = $conn->query($overlapQuery);
 
         if($updatedDayOfWeek == 0 || $updatedDayOfWeek == 6) {
-            echo "Error: Appointments are not allowed on weekends.";
+            echo "Error: Appointments are not allowed on weekends.\n";
         }
         else if ($overlapResult->num_rows > 0 ) {
-            echo "Error: Appointment time overlaps with an existing appointment.";
+            echo "Error: Appointment time overlaps with an existing appointment.\n";
+           
         }
         else if ($overlapResult->num_rows === 0){
             $updateQuery = "UPDATE Appointments 
@@ -48,9 +49,9 @@ if (isset($_GET['id'])) {
             WHERE id='$appointmentId'";
 
             if ($conn->query($updateQuery) === TRUE) {
-                echo "Appointment updated successfully!";
+                echo "Appointment updated successfully!\n";      
             } else {
-                echo "Error updating appointment: " . $conn->error;
+                echo "Error updating appointment: \n" . $conn->error;
             }
         }
     }
@@ -71,7 +72,8 @@ if (isset($_GET['id'])) {
         $patientName = $appointmentData['patient_name'];
         $patientContact = $appointmentData['patient_contact'];
     } else {
-        echo "Appointment not found.";
+        echo "Appointment not found. \n"; 
+        
         exit;
     }
 } else {
@@ -85,6 +87,9 @@ if (isset($_GET['id'])) {
     <title>Edit Appointment</title>
 </head>
 <body>
+
+<a href="appointment.html">Home Page</a>
+
     <h1>Edit Appointment</h1>
     <form action="edit_appointment.php?id=<?php echo $appointmentId; ?>" method="POST">
         <label for="doctor_id">Doctor:</label>

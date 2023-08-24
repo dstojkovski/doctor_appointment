@@ -11,6 +11,7 @@ $appointmentsResult = $conn->query($appointmentsQuery);
     <title>Appointments List</title>
 </head>
 <body>
+    <a href="appointment.html">Home Page</a>
     <h1>Appointments List</h1>
     <table>
         <tr>
@@ -45,6 +46,7 @@ $appointmentsResult = $conn->query($appointmentsQuery);
             }
         } else {
             echo "<tr><td colspan='11'>No appointments found.</td></tr>";
+            echo '<a class="button-link" href="appointment.html">Home Page</a>';
         }
         ?>
     </table>
