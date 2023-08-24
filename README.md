@@ -1,4 +1,5 @@
 Doctor's Appointment App
+
 Welcome to the Doctor's Appointment App! This is a simple web application that allows users to schedule, edit, and cancel appointments with a doctor. The application is built using PHP and MySQL.
 
 Features
@@ -12,7 +13,7 @@ Database Setup:
 Before starting, make sure you have MySQL and a web server (e.g., Apache) installed and running.
 
 Create a new connection with Hostname: localhost , username : root , password : 1234
-Create a new schema in MySQL, named pabau.
+Create a new schema in MySQL Workbench, named pabau.
 Import the provided pabau_appointments.sql file into the database from self-contained file. This will set up the required Appointments table.
 Application Setup:
 
