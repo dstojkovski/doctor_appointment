@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Schedule an Appointment</title>
+    <style>
+    
+        .button-link {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            text-decoration: none;
+            
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+            cursor: pointer;
+        }
+
+        .button-link:hover {
+            background-color: #0056b3;
+        }
+        
+        body { 
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        select, input[type="text"], textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            background-color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <h1>Schedule an Appointment</h1>
+    <div class="container">
+        <form action="appointments.php" method="POST">
+            <label for="doctor_id">Select Doctor:</label>
+            <select name="doctor_id" id="doctor_id">
+                <option value="1">Dr. David</option>
+            </select>
+            
+            <label for="start_time">Appointment Start Time:</label>
+            <input type="datetime-local" name="start_time" min="2023-08-21T09:00" max="2035-08-21T17:00" required>
+            
+            <label for="end_time">Appointment End Time:</label>
+            <input type="datetime-local" name="end_time" min="2023-08-21T09:00" max="2035-08-21T17:00" required>
+            
+            <label for="service_e">Select Service:</label>
+            <select name="service_e" id="service_e">
+                <option value="Checkup">Checkup</option>
+                <option value="Consultation">Consultation</option>
+                <option value="Routine">Routine physical exams</option>
+                <option value="Screening">Screening</option>
+                <option value="Treatment">Treatment</option>
+            </select>
+            
+            <label for="special_requirements">Special Requirements:</label>
+            <textarea name="special_requirements" rows="3"></textarea>
+            
+            <label for="medical_condition">Medical Condition:</label>
+            <textarea name="medical_condition" rows="3"></textarea>
+            
+            <label for="patient_name">Patient Name:</label>
+            <input type="text" name="patient_name" required>
+            
+            <label for="patient_contact">Patient Contact:</label>
+            <input type="text" name="patient_contact" required>
+            
+            <input class="button-link" type="submit" value="Schedule Appointment">
+            <a class="button-link" href="edit_appointment.php">Appointment List</a>
+            
+        </form>
+    </div>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const startInput = document.querySelector('input[name="start_time"]');
+            const endInput = document.querySelector('input[name="end_time"]');
+
+            startInput.addEventListener('input', function() {
+                const selectedDate = new Date(startInput.value);
+                const selectedDay = selectedDate.getDay();
+                const selectedHour = selectedDate.getHours();
+                if (selectedDay === 0 || selectedDay === 6 || selectedHour < 9 || selectedHour >= 17) {
+                    startInput.setCustomValidity('Appointments are only available between 9:00 AM and 5:00 PM on weekdays.');
+                } else {
+                    startInput.setCustomValidity('');
+                }
+            });
+
+            endInput.addEventListener('input', function() {
+                const selectedDate = new Date(endInput.value);
+                const selectedDay = selectedDate.getDay();
+                const selectedHour = selectedDate.getHours();
+                if (selectedDay === 0 || selectedDay === 6 || selectedHour < 9 || selectedHour >= 17) {
+                    endInput.setCustomValidity('Appointments are only available between 9:00 AM and 5:00 PM on weekdays.');
+                } else {
+                    endInput.setCustomValidity('');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
